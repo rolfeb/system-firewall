@@ -46,6 +46,16 @@ then
 	iptables -t nat -A PREROUTING -p tcp \
 		-i $INSIDE_IF -s $INSIDE_NET -d $OUTSIDE_ADDR --dport imaps \
 		-j DNAT --to-destination $IMAP_SERVER:993
+
+        iptables -A FORWARD -p tcp \
+                -i $INSIDE_IF \
+                -o $INSIDE_IF -d $IMAP_SERVER --dport imaps \
+                -m state --state NEW,ESTABLISHED -j ACCEPT
+
+        iptables -A FORWARD -p tcp \
+                -i $INSIDE_IF -s $IMAP_SERVER --sport imaps \
+                -o $INSIDE_IF \
+                -m state --state ESTABLISHED -j ACCEPT
 else
 	echo "NOTE: not redirecting outgoing imaps connections to mail server"
 fi
