@@ -4,8 +4,8 @@
 # Required-Start:    networking
 # Required-Stop:
 # Should-Start:      
-# Default-Start:     S
-# Default-Stop:
+# Default-Start:     1 2 3 4 5
+# Default-Stop:      0 6
 # Short-Description: Initialise the firewall rules
 # Description:       Initialises the iptables firewall rules.
 ### END INIT INFO

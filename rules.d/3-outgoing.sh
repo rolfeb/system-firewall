@@ -22,6 +22,10 @@ forward_to_outside tcp 8000
 forward_to_outside tcp 8080
 forward_to_outside tcp 8081
 
+# Adobe flash security policy
+forward_to_outside tcp 843
+
+
 # telnet
 forward_to_outside tcp telnet
 
