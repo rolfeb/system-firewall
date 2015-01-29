@@ -95,8 +95,19 @@ iptables -A INPUT -p udp -i $INSIDE_IF -d 255.255.255.255/32 -j DROP
 
 iptables -A INPUT -p igmp -i $INSIDE_IF -d 224.0.0.1/32 -j DROP
 
+
 #
-# Log anthything else
+# Log invalid packets separately
+#
+iptables -N invalid
+iptables -A INPUT -m state --state INVALID -j invalid
+iptables -A FORWARD -m state --state INVALID -j invalid
+iptables -A invalid -j LOG -m limit --limit 1/s --limit-burst 4  --log-level 3 --log-prefix "fw:ip:invalid "
+iptables -A invalid -j DROP
+iptables -A invalid -j RETURN
+
+#
+# Log anything else
 #
 iptables -A INPUT -j LOG -m limit --limit 1/s --limit-burst 4  --log-level 3 --log-prefix "fw:ip:INPUT:drop "
 iptables -A OUTPUT -j LOG -m limit --limit 1/s --limit-burst 4  --log-level 3 --log-prefix "fw:ip:OUTPUT:drop "
