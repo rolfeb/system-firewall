@@ -3,6 +3,6 @@
 # Rules controlling traffic to/from DMZ 
 #
 
-. ./functions.sh
+. functions.sh
 
 exit 0

@@ -5,19 +5,19 @@
 
 echo "** Starting firewall configuration..."
 
-PATH=$PATH:/sbin:/usr/bin:/bin
+DIR=`dirname $0`
+
+PATH=$DIR:/sbin:/usr/bin:/bin:/usr/local/bin
 export PATH
 
 #
 # Sanity checks
 #
-DIR=`dirname $0`
 if [ ! -d $DIR/rules.d ]
 then
 	echo "$0: no such directory: $DIR/rules.d" >&1
 	exit 1
 fi
-cd $DIR
 
 export OUTSIDE_IF=eth0.201
 export OUTSIDE_NET=0.0.0.0/0
@@ -51,8 +51,7 @@ modprobe ip_conntrack
 modprobe ip_conntrack_ftp
 modprobe ip_nat_ftp
 
-. ./functions.sh
-
+. functions.sh
 
 #
 # Set default policies and initial blocking rules
@@ -75,7 +74,7 @@ iptables -A INPUT -j DROP
 iptables -A OUTPUT -j DROP
 iptables -A FORWARD -j DROP
 
-for r in `ls -1 $DIR/rules.d/*.sh`
+for r in $DIR/rules.d/*.sh
 do
 	echo "running $r..."
 	$r

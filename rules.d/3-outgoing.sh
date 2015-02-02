@@ -3,7 +3,7 @@
 # Rules controlling traffic from the inside to the outside
 #
 
-. ./functions.sh
+. functions.sh
 
 # mail
 forward_to_outside tcp smtp
@@ -70,6 +70,15 @@ forward_to_outside tcp 3690
 
 # Yum repos
 forward_to_outside tcp 4040
+
+#
+# Stuff from Windows et al.
+#
+forward_to_outside tcp 40001:40046  # MS updates, errors, authentication
+forward_to_outside tcp 12350        # Skype
+forward_to_outside tcp 33033        # Skype
+
+
 
 #
 # Finally, rewrite the source addresses of all outgoing packets

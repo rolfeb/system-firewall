@@ -3,6 +3,6 @@
 # Rules controlling traffic from the outside to the inside
 #
 
-. ./functions.sh
+. functions.sh
 
 exit 0

@@ -3,7 +3,7 @@
 # Rules controlling traffic to/from the firewall itself 
 #
 
-. ./functions.sh
+. functions.sh
 
 # allow everything on the loopback interface
 iptables -A INPUT  -i lo -j ACCEPT

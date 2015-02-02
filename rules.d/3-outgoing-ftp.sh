@@ -3,7 +3,7 @@
 # Rules controlling traffic from the inside to the outside - FTP
 #
 
-. ./functions.sh
+. functions.sh
 
 #
 # control port
