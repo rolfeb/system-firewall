@@ -19,8 +19,13 @@ then
 	exit 1
 fi
 
+#
+# Configuration
+#
+
 export OUTSIDE_IF=eth0.201
 export OUTSIDE_NET=0.0.0.0/0
+# external IP is dynamic:
 export OUTSIDE_ADDR=`/sbin/ifconfig $OUTSIDE_IF | awk '/inet addr/ { print $2; }' | awk -F: '{ print $2 }'`
 
 if [ -z "$OUTSIDE_ADDR" ]
@@ -93,7 +98,6 @@ iptables -A INPUT -p udp -i $INSIDE_IF -d 192.168.13.255/32 -j DROP
 iptables -A INPUT -p udp -i $INSIDE_IF -d 255.255.255.255/32 -j DROP
 
 iptables -A INPUT -p igmp -i $INSIDE_IF -d 224.0.0.1/32 -j DROP
-
 
 #
 # Log invalid packets separately
