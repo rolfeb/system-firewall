@@ -5,9 +5,11 @@
 
 echo "** Starting firewall configuration..."
 
+PATH=/sbin:/usr/bin:/bin:/usr/local/bin
+
 DIR=`dirname $0`
 
-PATH=$DIR:/sbin:/usr/bin:/bin:/usr/local/bin
+PATH=$DIR:$PATH
 export PATH
 
 #
