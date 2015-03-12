@@ -62,26 +62,6 @@ iptables -A icmp-o -p icmp --icmp-type parameter-problem -j ACCEPT
 iptables -A icmp-o -p icmp --icmp-type source-quench -j ACCEPT
 iptables -A icmp-o -p icmp --icmp-type time-exceeded -j ACCEPT
 
-
-
-
-
-#
-# Traceroute packets (replies handled via icmp timeout-exceeded above)
-#
-#	ext -> fw (33434:33523)
-#	fw -> ext (33434:33523)
-#	fw -> int (33434:33523)
-#	int -> fw (33434:33523)
-#	int -> ext (33434:33523)
-#
-### iptables -A INPUT -i $OUTSIDE_IF -p udp --dport 33434:33523 -j LOG --log-level 3 --log-prefix "traceroute-probe "
-### iptables -A INPUT -i $OUTSIDE_IF -p udp --dport 33434:33523 -j ACCEPT
-### iptables -A OUTPUT -o $OUTSIDE_IF -p udp --dport 33434:33523 -j ACCEPT
-### iptables -A OUTPUT -o $INSIDE_IF -p udp --dport 33434:33523 -j ACCEPT
-### iptables -A INPUT -i $INSIDE_IF -p udp --dport 33434:33523 -j ACCEPT
-### iptables -A FORWARD -i $INSIDE_IF -o $OUTSIDE_IF -p udp --dport 33434:33523 -j ACCEPT
-
 #
 # Log and drop any other ICMP
 #
