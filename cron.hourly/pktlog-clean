@@ -1,0 +1,3 @@
+#!/bin/sh
+
+find /data/log/. -type f -name '*.dat' -mtime +3 | xargs rm -f
