@@ -41,6 +41,11 @@ iptables -A FORWARD -p tcp \
 # Redirect outgoing connections to the public imaps port back to the
 # internal server.
 #
+# I use this so that if I can switch portable device between the inside and
+# outside networks and just have them configured with the external address
+# of the mail server.  Otherwise you probably don't need to use these
+# rules.
+#
 if [ "$OUTSIDE_ADDR" ]
 then
 	iptables -t nat -A PREROUTING -p tcp \
