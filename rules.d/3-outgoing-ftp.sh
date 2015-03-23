@@ -36,14 +36,14 @@ iptables -A FORWARD -p tcp --dport ftp-data \
 #
 # data port - passive mode
 #
-# client: >1023 -> server: >1023    (related allowed)
-# client: >1023 <- server: >1023    (established only)
+# client: >=1024 -> server: >=1024    (related allowed)
+# client: >=1024 <- server: >=1024    (established only)
 #
-iptables -A FORWARD -p tcp --sport 1023: --dport 1023: \
+iptables -A FORWARD -p tcp --sport 1024: --dport 1024: \
     $FROM_INSIDE $TO_OUTSIDE \
     -m state --state RELATED,ESTABLISHED -j ACCEPT
 
-iptables -A FORWARD -p tcp --sport 1023: --dport 1023: \
+iptables -A FORWARD -p tcp --sport 1024: --dport 1024: \
     $FROM_OUTSIDE $TO_INSIDE \
     -m state --state ESTABLISHED -j ACCEPT
 
