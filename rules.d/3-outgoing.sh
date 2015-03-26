@@ -25,6 +25,8 @@ forward_to_outside tcp 8081
 # Adobe flash security policy
 forward_to_outside tcp 843
 
+# Akamai CDN
+forward_to_outside tcp 1935
 
 # telnet
 forward_to_outside tcp telnet
