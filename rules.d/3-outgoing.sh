@@ -73,6 +73,9 @@ forward_to_outside tcp 3690
 # Yum repos
 forward_to_outside tcp 4040
 
+# Apple push notification service
+forward_to_outside tcp 5223 17.132.254.0/24
+
 #
 # Stuff from Windows et al.
 #

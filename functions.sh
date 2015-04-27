@@ -5,12 +5,21 @@ forward_to_outside()
 	proto=$1
 	port=$2
 
+        if [ "$3" ]
+        then
+            src_restrict="-i $OUTSIDE_IF -s $3"
+            dst_restrict="-o $OUTSIDE_IF -d $3"
+        else
+            src_restrict=$FROM_OUTSIDE
+            dst_restrict=$TO_OUTSIDE
+        fi
+
 	iptables -A FORWARD -p $proto --dport $port \
-		$FROM_INSIDE $TO_OUTSIDE \
+		$FROM_INSIDE $dst_restrict \
 		-m state --state NEW,ESTABLISHED -j ACCEPT
 
 	iptables -A FORWARD -p $proto --sport $port \
-		$FROM_OUTIDE $TO_INSIDE \
+		$src_restrict $TO_INSIDE \
 		-m state --state ESTABLISHED -j ACCEPT
 }
 
