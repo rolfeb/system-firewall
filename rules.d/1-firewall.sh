@@ -25,7 +25,9 @@ accept_from_outside udp 68
 
 # DNS
 accept_from_inside udp domain
+accept_from_inside tcp domain
 accept_from_dmz udp domain
+accept_from_dmz tcp domain
 
 # DNS (temporary)
 allow_to_inside udp domain
