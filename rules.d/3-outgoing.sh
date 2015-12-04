@@ -8,6 +8,7 @@
 # mail
 forward_to_outside tcp smtp
 forward_to_outside tcp pop3
+forward_to_outside tcp pop3s
 forward_to_outside tcp imap
 forward_to_outside tcp imaps
 
