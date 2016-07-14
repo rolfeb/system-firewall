@@ -84,6 +84,14 @@ forward_to_outside tcp 40001:40046  # MS updates, errors, authentication
 forward_to_outside tcp 12350        # Skype
 forward_to_outside tcp 33033        # Skype
 
+#
+# Traffic from Android (Galaxy S7 phone)
+#
+# tcp/7275 = User Plane Location protocol
+# udp/443 = Google QUIC protocol
+#
+forward_to_outside tcp 7275
+forward_to_outside udp 443
 
 
 #
