@@ -5,6 +5,9 @@
 
 . functions.sh
 
+# special dispensation for specific hosts
+forward_host_to_outside 192.168.13.35/32    # Scott's laptop
+
 # mail
 forward_to_outside tcp smtp
 forward_to_outside tcp pop3
@@ -92,7 +95,6 @@ forward_to_outside tcp 33033        # Skype
 #
 forward_to_outside tcp 7275
 forward_to_outside udp 443
-
 
 #
 # Finally, rewrite the source addresses of all outgoing packets

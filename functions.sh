@@ -106,3 +106,18 @@ allow_to_inside()
 		$FROM_INSIDE \
 		-m state --state ESTABLISHED -j ACCEPT
 }
+
+forward_host_to_outside()
+{
+	host=$1
+
+	iptables -A FORWARD \
+        -i $INSIDE_IF -s $host \
+		$TO_OUTSIDE \
+		-m state --state NEW,ESTABLISHED -j ACCEPT
+
+	iptables -A FORWARD \
+        -o $INSIDE_IF -d $host \
+		$FROM_OUTSIDE \
+		-m state --state ESTABLISHED -j ACCEPT
+}
