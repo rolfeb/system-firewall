@@ -92,9 +92,12 @@ forward_to_outside tcp 33033        # Skype
 #
 # tcp/7275 = User Plane Location protocol
 # udp/443 = Google QUIC protocol
+# tcp/5223 = WhatsApp
 #
 forward_to_outside tcp 7275
 forward_to_outside udp 443
+forward_to_outside tcp 5223
+forward_to_outside udp 3478
 
 #
 # Finally, rewrite the source addresses of all outgoing packets
