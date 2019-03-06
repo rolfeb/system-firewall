@@ -107,17 +107,30 @@ allow_to_inside()
 		-m state --state ESTABLISHED -j ACCEPT
 }
 
-forward_host_to_outside()
+forward_host_to_outside()   # host [proto port]
 {
 	host=$1
+    proto=$2
+    port=$3
 
-	iptables -A FORWARD \
+    if [ "$proto" ] && [ "$port" ]
+    then
+        out_dport_restrict="-p $proto --dport $port"
+        in_sport_restrict="-p $proto --sport $port"
+    else
+        out_dport_restrict=""
+        in_sport_restrict=""
+    fi
+
+    iptables -A FORWARD \
+        $out_dport_restrict \
         -i $INSIDE_IF -s $host \
-		$TO_OUTSIDE \
-		-m state --state NEW,ESTABLISHED -j ACCEPT
+        $TO_OUTSIDE \
+        -m state --state NEW,ESTABLISHED -j ACCEPT
 
-	iptables -A FORWARD \
+    iptables -A FORWARD \
+        $in_sport_restrict \
         -o $INSIDE_IF -d $host \
-		$FROM_OUTSIDE \
-		-m state --state ESTABLISHED -j ACCEPT
+        $FROM_OUTSIDE \
+        -m state --state ESTABLISHED -j ACCEPT
 }

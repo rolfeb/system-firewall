@@ -6,7 +6,7 @@
 . functions.sh
 
 # special dispensation for specific hosts
-forward_host_to_outside 192.168.13.35/32    # Scott's laptop
+# forward_host_to_outside 192.168.13.35/32    # Scott's laptop
 
 # mail
 forward_to_outside tcp smtp
@@ -98,6 +98,16 @@ forward_to_outside tcp 7275
 forward_to_outside udp 443
 forward_to_outside tcp 5223
 forward_to_outside udp 3478
+
+#
+# Petcare hub
+#
+forward_to_outside tcp 8883
+
+#
+# Jamie's mac uses PIA, so let it do its "pinging" to find the closest server
+#
+forward_host_to_outside 192.168.13.12 udp 8888
 
 #
 # Finally, rewrite the source addresses of all outgoing packets
