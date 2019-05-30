@@ -110,6 +110,12 @@ forward_to_outside tcp 8883
 forward_host_to_outside 192.168.13.12 udp 8888
 
 #
+# IPSec VPN
+#
+forward_to_outside udp 500
+forward_to_outside udp 4500
+
+#
 # Finally, rewrite the source addresses of all outgoing packets
 # (dynamic external address)
 #
