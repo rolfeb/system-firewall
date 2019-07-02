@@ -115,6 +115,10 @@ forward_host_to_outside 192.168.13.12 udp 8888
 forward_to_outside udp 500
 forward_to_outside udp 4500
 
+# external SSH access to The Commons
+forward_to_outside tcp 1982
+
+
 #
 # Finally, rewrite the source addresses of all outgoing packets
 # (dynamic external address)
